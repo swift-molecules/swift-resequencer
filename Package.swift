@@ -7,6 +7,8 @@ let package = Package(
     products: [.library(name: "Resequencer", targets: ["Resequencer"])],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-queue.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-buffer-ring.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-memory-allocation.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-index.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ordinal.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-cardinal.git", branch: "main"),
@@ -16,6 +18,8 @@ let package = Package(
             name: "Resequencer",
             dependencies: [
                 .product(name: "Queue", package: "swift-queue"),
+                .product(name: "Buffer Ring Primitive", package: "swift-buffer-ring"),
+                .product(name: "Memory Allocator Protocol", package: "swift-memory-allocation"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Cardinal", package: "swift-cardinal"),

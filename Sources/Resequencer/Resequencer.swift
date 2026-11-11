@@ -1,5 +1,7 @@
+import Buffer_Ring_Primitive
 public import Cardinal
 import Index
+import Memory_Allocator_Protocol
 public import Ordinal
 import Queue
 
@@ -62,7 +64,11 @@ extension Resequencer where Value: ~Copyable {
         guard let position = next, slots.peek({ $0 != nil }) == true, let value = slots.dequeue() else {
             return nil
         }
-        next = try? position.successor.exact()
+        do throws(Ordinal.Error) {
+            next = try position.successor.exact()
+        } catch {
+            next = nil
+        }
         count = count.subtract.saturating(.one)
         return value
     }
