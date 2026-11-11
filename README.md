@@ -1,12 +1,6 @@
 # swift-resequencer
 
-Use this package when values are produced out of order but must be consumed in order: frames rendered in parallel and handed to an encoder one by one, replies to numbered requests, chunks of a download. Start from `Resequencer<Value>`: each value arrives tagged with an `Ordinal` position, and the resequencer hands values on in position order, each as soon as every earlier position has been handed on. Values may be `~Copyable`. The resequencer waits for every position, so use it only when each one will arrive. When values should leave smallest first without waiting for the ones in between, use swift-heap. When they should leave in arrival order, use swift-queue.
-
-```swift
-var frames = Resequencer<Frame>(window: 8)
-try frames.arrive(frame, at: position)
-while let frame = frames.release() { encoder.append(frame) }
-```
+Use this package when values are produced out of order but must be consumed in order: frames rendered in parallel and handed to an encoder one by one, replies to numbered requests, chunks of a download. Start from `Resequencer<Value>`: each value arrives tagged with an `Ordinal` position, and the resequencer hands values on in position order, each as soon as every earlier position has been handed on. Call `arrive(_:at:)` as values come in and `release()` until it returns `nil`. Values may be `~Copyable`. The resequencer waits for every position, so use it only when each one will arrive. When values should leave smallest first without waiting for the ones in between, use swift-heap. When they should leave in arrival order, use swift-queue.
 
 ## Laws
 
