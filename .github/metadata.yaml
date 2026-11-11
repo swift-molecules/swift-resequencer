@@ -1,0 +1,9 @@
+description: "A reorder buffer for Swift: values arrive tagged with a position, in any order, and are handed on in position order, each as soon as every earlier position has been handed on."
+topics:
+  - molecules
+  - resequencer
+  - reorder-buffer
+  - queue
+homepage: "https://swift-institute.org"
+readme:
+  family: E
